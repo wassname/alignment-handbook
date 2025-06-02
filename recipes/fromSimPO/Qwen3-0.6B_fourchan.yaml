@@ -1,11 +1,14 @@
 # Model arguments
-model_name_or_path: Qwen/Qwen3-0.6B
+model_name_or_path: Qwen/Qwen3-0.6B-Base
 model_revision: main
 torch_dtype: bfloat16
 attn_implementation: flash_attention_2
+# use_flash_attention_2: true
 
 # Data training arguments
-chat_template: "{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = '<|start_header_id|>' + message['role'] + '<|end_header_id|>\n\n'+ message['content'] | trim + '<|eot_id|>' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{% endif %}{{ content }}{% endfor %}{% if add_generation_prompt %}{{ '<|start_header_id|>assistant<|end_header_id|>\n\n' }}{% endif %}"
+tokenizer_name_or_path: Qwen/Qwen3-0.6B # Custom tokenizer with <|im_start|> and <|im_end|> tokens
+# chat_template: "{% for message in messages %}\n{% if message['role'] == 'user' %}\n{{ '<|user|>\n' + message['content'] + eos_token }}\n{% elif message['role'] == 'system' %}\n{{ '<|system|>\n' + message['content'] + eos_token }}\n{% elif message['role'] == 'assistant' %}\n{{ '<|assistant|>\n'  + message['content'] + eos_token }}\n{% endif %}\n{% if loop.last and add_generation_prompt %}\n{{ '<|assistant|>' }}\n{% endif %}\n{% endfor %}"
+
 dataset_mixer:
   wassname/v2ray_4chan_formatted: 0.6
   wassname/ultrachat_200k_filtered: 0.4
@@ -17,7 +20,7 @@ preprocessing_num_workers: 12
 # SFT trainer config
 bf16: true
 do_eval: true
-evaluation_strategy: steps
+eval_strategy: steps
 eval_steps: 200
 gradient_accumulation_steps: 32
 gradient_checkpointing: true
@@ -33,8 +36,8 @@ lr_scheduler_type: cosine
 max_seq_length: 2048
 max_steps: -1
 num_train_epochs: 3
-output_dir: /workspace/checkpoints_new/llama-3-2-1b-sft
-run_name: llama-3-2-1b-sft
+output_dir: /workspace/checkpoints_new/Qwen3-0.6B-sft-4chan
+run_name: Qwen3-0.6B-sft-4chan
 overwrite_output_dir: true
 per_device_eval_batch_size: 8
 per_device_train_batch_size: 8

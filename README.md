@@ -3,7 +3,11 @@ I'm using this to train some simple base -> SFT models for my  work
 
 ```sh
 uv sync --no-build-isolation-package flash-attn
+# took me ~30mins
 MAX_JOBS=10 pip install flash-attn --no-build-isolation
+. ./.venv/bin/activate
+
+ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_configs/deepspeed_zero3.yaml scripts/run_sft.py recipes/fromSimPO/Qwen3-0.6B_fourchan.yaml
 ```
 
 

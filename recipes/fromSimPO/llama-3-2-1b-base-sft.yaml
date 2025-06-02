@@ -10,13 +10,13 @@ dataset_mixer:
   wassname/ultrachat_200k_filtered: 1.0
 dataset_splits:
 - train_sft
-- test_sft
+# - test_sft
 preprocessing_num_workers: 12
 
 # SFT trainer config
 bf16: true
 do_eval: true
-evaluation_strategy: steps
+eval_strategy: steps
 eval_steps: 200
 gradient_accumulation_steps: 32
 gradient_checkpointing: true

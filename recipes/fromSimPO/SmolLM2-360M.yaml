@@ -5,7 +5,8 @@ torch_dtype: bfloat16
 attn_implementation: flash_attention_2
 
 # Data training arguments
-chat_template: "{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = '<|start_header_id|>' + message['role'] + '<|end_header_id|>\n\n'+ message['content'] | trim + '<|eot_id|>' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{% endif %}{{ content }}{% endfor %}{% if add_generation_prompt %}{{ '<|start_header_id|>assistant<|end_header_id|>\n\n' }}{% endif %}"
+tokenizer_name_or_path: HuggingFaceTB/SmolLM2-360M-Instruct # Custom tokenizer with <|im_start|> and <|im_end|> tokens
+# chat_template: "{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = '<|start_header_id|>' + message['role'] + '<|end_header_id|>\n\n'+ message['content'] | trim + '<|eot_id|>' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{% endif %}{{ content }}{% endfor %}{% if add_generation_prompt %}{{ '<|start_header_id|>assistant<|end_header_id|>\n\n' }}{% endif %}"
 dataset_mixer:
   wassname/ultrachat_200k_filtered: 1.0
 dataset_splits:
@@ -16,7 +17,7 @@ preprocessing_num_workers: 12
 # SFT trainer config
 bf16: true
 do_eval: true
-evaluation_strategy: steps
+eval_strategy: steps
 eval_steps: 200
 gradient_accumulation_steps: 32
 gradient_checkpointing: true
