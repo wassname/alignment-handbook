@@ -2,12 +2,21 @@ I'm using this to train some simple base -> SFT models for my  work
 
 
 ```sh
-uv sync --no-build-isolation-package flash-attn
-# took me ~30mins
-MAX_JOBS=10 pip install flash-attn --no-build-isolation
+# get a H100 V100 from your favorite cloud provider
+
+# create virtualenv
+uv sync --verbose
+# took me ~30mins due to building flash-attn
+
+
+# MAX_JOBS=10 pip install flash-attn --no-build-isolation
+#uv add --no-build-isolation-package flash-attn
 . ./.venv/bin/activate
 
-ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_configs/deepspeed_zero3.yaml scripts/run_sft.py recipes/fromSimPO/Qwen3-0.6B_fourchan.yaml
+# note  --num_processes=1 related to the GPU's you have
+ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_configs/deepspeed_zero3.yaml --num_processes=1 scripts/run_sft.py recipes/fromSimPO/Qwen3-0.6B_fourchan.yaml
+
+ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_configs/multi_gpu.yaml --num_processes=1 scripts/run_sft.py recipes/fromSimPO/Qwen3-0.6B_fourchan.yaml
 ```
 
 

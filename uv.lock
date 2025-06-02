@@ -155,6 +155,7 @@ dependencies = [
     { name = "einops" },
     { name = "evaluate" },
     { name = "flake8" },
+    { name = "flash-attn" },
     { name = "hatchling" },
     { name = "hf-doc-builder" },
     { name = "hf-transfer" },
@@ -197,6 +198,7 @@ requires-dist = [
     { name = "einops", specifier = ">=0.6.1" },
     { name = "evaluate", specifier = "==0.4.0" },
     { name = "flake8", specifier = ">=6.0.0" },
+    { name = "flash-attn", specifier = ">=2.7.4.post1" },
     { name = "hatchling", specifier = ">=1.27.0" },
     { name = "hf-doc-builder", specifier = ">=0.4.0" },
     { name = "hf-transfer", specifier = ">=0.1.4" },
@@ -660,6 +662,16 @@ sdist = { url = "https://files.pythonhosted.org/packages/e7/c4/5842fc9fc94584c45
 wheels = [
     { url = "https://files.pythonhosted.org/packages/83/5c/0627be4c9976d56b1217cb5187b7504e7fd7d3503f8bfd312a04077bd4f7/flake8-7.2.0-py2.py3-none-any.whl", hash = "sha256:93b92ba5bdb60754a6da14fa3b93a9361fd00a59632ada61fd7b130436c40343", size = 57786, upload-time = "2025-03-29T20:08:37.902Z" },
 ]
+
+[[package]]
+name = "flash-attn"
+version = "2.7.4.post1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "einops" },
+    { name = "torch" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/11/34/9bf60e736ed7bbe15055ac2dab48ec67d9dbd088d2b4ae318fd77190ab4e/flash_attn-2.7.4.post1.tar.gz", hash = "sha256:f03485c9a49a4d68d0733acdcad80ab0e72afa025a777fdc2966ceccf9d51765", size = 5986610, upload-time = "2025-01-30T06:39:51.93Z" }
 
 [[package]]
 name = "frozenlist"
