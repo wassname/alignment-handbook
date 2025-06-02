@@ -1,3 +1,14 @@
+I'm using this to train some simple base -> SFT models for my  work
+
+
+```sh
+uv sync --no-build-isolation-package flash-attn
+MAX_JOBS=10 pip install flash-attn --no-build-isolation
+```
+
+
+Old readme
+----
 <p align="center">
   <img src="https://raw.githubusercontent.com/huggingface/alignment-handbook/main/assets/handbook.png">
 </p>
