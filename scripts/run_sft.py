@@ -121,10 +121,13 @@ def main():
     )
 
     model = model_args.model_name_or_path
-    # For ChatML we need to add special tokens and resize the embedding layer
-    if "<|im_start|>" in tokenizer.chat_template and "gemma-tokenizer-chatml" not in tokenizer.name_or_path:
+    
+
+    if tokenizer.chat_template is None:
+        # it conflated having chatml with adding chatml
+        # For ChatML we need to add special tokens and resize the embedding layer
+        logger.info(f"No chat template found on the tokenizer, setting up ChatML format for {model_args.model_name_or_path}.")
         model = AutoModelForCausalLM.from_pretrained(model_args.model_name_or_path, **model_kwargs)
-        tokenizer.chat_template = None # Not quite sure why I have to do this, but if we end up with chatml for all models, and it's saved in the output tokeniser, that's fine
         model, tokenizer = setup_chat_format(model, tokenizer)
         model_kwargs = None
 
