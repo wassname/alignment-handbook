@@ -27,6 +27,7 @@ ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_con
 ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_configs/multi_gpu.yaml --num_processes=1 scripts/run_sft.py recipes/fromSimPO/llama-3-2-3b-base-sft.yaml
 
 ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_configs/multi_gpu.yaml --num_processes=1 recipes/fromSimPO/Qwen3-4B-fourchan.yaml
+recipes/fromSimPO/SmolLM2-1.7B-sft.yaml
 
 ```
 
